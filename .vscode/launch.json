@@ -1,0 +1,79 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug: Current Year/Puzzle",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=flipflop_codes",
+                    "--package=flipflop_codes"
+                ],
+                "filter": {
+                    "name": "flipflop_codes",
+                    "kind": "bin"
+                }
+            },
+            "args": ["${fileDirnameBasename}", "${fileBasenameNoExtension}"],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug: All Solutions",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=flipflop_codes",
+                    "--package=flipflop_codes"
+                ],
+                "filter": {
+                    "name": "flipflop_codes",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Run: Current Year/Puzzle (Release)",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--release",
+                    "--bin=flipflop_codes",
+                    "--package=flipflop_codes"
+                ],
+                "filter": {
+                    "name": "flipflop_codes",
+                    "kind": "bin"
+                }
+            },
+            "args": ["${fileDirnameBasename}", "${fileBasenameNoExtension}"],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Run: All Solutions (Release)",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--release",
+                    "--bin=flipflop_codes",
+                    "--package=flipflop_codes"
+                ],
+                "filter": {
+                    "name": "flipflop_codes",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        }
+    ],
+}

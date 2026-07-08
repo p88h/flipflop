@@ -1,0 +1,20 @@
+[package]
+name = "flipflop_codes"
+version = "0.1.0"
+edition = "2024"
+default-run = "flipflop_codes"
+
+[dependencies]
+itertools = "0.14.0"
+num-bigint = "0.4.6"
+num-complex = "0.4.6"
+num-traits = "0.2.19"
+rayon = "1.11.0"
+wide = "0.8.1"
+
+[dev-dependencies]
+criterion = "0.5"
+
+[[bench]]
+name = "run_bench"
+harness = false
