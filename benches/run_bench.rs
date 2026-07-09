@@ -1,12 +1,12 @@
 use criterion::{criterion_group, criterion_main, Criterion};
 
-fn read_input(year: i32, puzzle: i32, part: i32) -> String {
-    let path = format!("input/flipflop_codes_{year}_{puzzle:02}_{part}.txt");
+fn read_input(year: i32, puzzle: i32, _part: i32) -> String {
+    let path = format!("input/flipflop_codes_{year}_{puzzle:02}.txt");
     std::fs::read_to_string(path).unwrap_or_default()
 }
 
 pub fn criterion_benchmark(c: &mut Criterion) {
-    let solutions = flipflop_codes::e2025();
+    let solutions = flipflop_codes::y2026();
     for sol in solutions {
         let input1 = read_input(sol.year, sol.puzzle, 1);
         let input2 = read_input(sol.year, sol.puzzle, 2);

@@ -1,63 +1,22 @@
 pub fn part1(input: &str) -> String {
-    let mut lines = input.lines();
-    let words = lines.next().unwrap().split(",").collect::<Vec<&str>>();
-    lines.next();
-    let dirs = lines.next().unwrap().split(",");
-    let mut pos = 0;
-    for dir in dirs {
-        let ofs = dir[1..].parse::<i32>().unwrap() % words.len() as i32;
-        match dir.chars().next().unwrap() {
-            'L' => pos -= ofs,
-            'R' => pos += ofs,
-            _ => {}
-        }
-        if pos < 0 {
-            pos = 0;
-        } else if pos >= words.len() as i32 {
-            pos = words.len() as i32 - 1;
-        }
-    }
-    words[pos as usize].to_string()
+    let nums = input.lines().filter_map(|s| s.parse::<i32>().ok()).collect::<Vec<i32>>();
+    let sum: i32 = nums.iter().filter_map(|&n| if n < 60 { Some(60-n) } else { None }).sum();
+    sum.to_string()
 }
 
 pub fn part2(input: &str) -> String {
-    let mut lines = input.lines();
-    let words = lines.next().unwrap().split(",").collect::<Vec<&str>>();
-    lines.next();
-    let dirs = lines.next().unwrap().split(",");
-    let mut pos = 0;
-    for dir in dirs {
-        let ofs = dir[1..].parse::<i32>().unwrap() % words.len() as i32;
-        match dir.chars().next().unwrap() {
-            'L' => pos -= ofs,
-            'R' => pos += ofs,
-            _ => {}
-        }
-        if pos < 0 {
-            pos += words.len() as i32;
-        } else if pos >= words.len() as i32 {
-            pos -= words.len() as i32;
-        }
-    }
-    words[pos as usize].to_string()
+    let nums = input.lines().filter_map(|s| s.parse::<i32>().ok()).collect::<Vec<i32>>();
+    let sum: i32 = nums.iter().filter_map(|&n| if n < 60 { Some(60-n) } else { Some((n-60)*5) }).sum();
+    sum.to_string()
 }
 
 pub fn part3(input: &str) -> String {
-    let mut lines = input.lines();
-    let mut words = lines.next().unwrap().split(",").collect::<Vec<&str>>();
-    lines.next();
-    let dirs = lines.next().unwrap().split(",");
-    for dir in dirs {
-        let ofs = dir[1..].parse::<usize>().unwrap() % words.len();
-        let mut pos = 0;
-        match dir.chars().next().unwrap() {
-            'L' => pos = (words.len() - ofs) % words.len(),
-            'R' => pos = ofs,
-            _ => {}
-        }
-        words.swap(0, pos);
-    }
-    words[0].to_string()
+    let nums = input.lines().filter_map(|s| s.parse::<i32>().ok()).collect::<Vec<i32>>();
+    let left = &nums[..nums.len()/2];
+    let right = &nums[nums.len()/2..];
+    let zipped = left.iter().zip(right.iter());
+    let sum = zipped.filter_map(|(&l, &r)| if l < r { Some(r-l) } else { Some((l-r)*5) }).sum::<i32>();
+    sum.to_string()
 }
 
 #[cfg(test)]
@@ -66,19 +25,19 @@ mod tests {
 
     #[test]
     fn test_part1() {
-        let input = "Vyrdax,Drakzyph,Fyrryn,Elarzris\n\nR3,L2,R3,L1";
-        assert_eq!(part1(input), "Fyrryn");
+        let input = "41\n87\n93\n104\n46\n102\n65\n105\n81\n36\n66\n46\n60\n65\n64\n64\n61\n73\n55\n69";
+        assert_eq!(part1(input), "76");
     }
 
     #[test]
     fn test_part2() {
-        let input = "Vyrdax,Drakzyph,Fyrryn,Elarzris\n\nR3,L2,R3,L1";
-        assert_eq!(part2(input), "Elarzris");
+        let input = "41\n87\n93\n104\n46\n102\n65\n105\n81\n36\n66\n46\n60\n65\n64\n64\n61\n73\n55\n69";
+        assert_eq!(part2(input), "1371");
     }
 
     #[test]
     fn test_part3() {
-        let input = "Vyrdax,Drakzyph,Fyrryn,Elarzris\n\nR3,L2,R3,L3";
-        assert_eq!(part3(input), "Drakzyph");
+        let input = "41\n87\n93\n104\n46\n102\n65\n105\n81\n36\n66\n46\n60\n65\n64\n64\n61\n73\n55\n69";
+        assert_eq!(part3(input), "1141");
     }
 }
