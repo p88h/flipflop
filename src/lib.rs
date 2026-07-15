@@ -37,5 +37,5 @@ macro_rules! library {
 }
 
 library!(
-    y2026 { d01 }
+    y2026 { d01, d02 }
 );
