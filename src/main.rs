@@ -24,7 +24,7 @@ fn run_part(year: i32, puzzle: i32, part: i32, func: fn(&str) -> String) -> (Str
     let input = read_input(year, puzzle, part);
     let start = Instant::now();
     let result = func(&input);
-    for _ in 0..9 {
+    for _ in 0..99 {
         let other = func(&input);
         if other != result {
             panic!(
@@ -33,7 +33,7 @@ fn run_part(year: i32, puzzle: i32, part: i32, func: fn(&str) -> String) -> (Str
             );
         }
     }
-    let duration = start.elapsed() / 10;
+    let duration = start.elapsed() / 100;
     // auto format duration
     if duration.as_nanos() < 1_000 {
         (result, format!("({} ns)", duration.as_nanos()))
